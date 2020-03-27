@@ -58,8 +58,11 @@ void forward_tanh(
 
     auto grad_X = X.get_gradient();
     for(int p=0;p<n;p++)
-      for(int q=0;q<config[0];q++)
-        sensitivity[k1++] = grad_X(p, q);
+      for(int q=0;q<config[0];q++){
+          int idx = p*config[0]*config[m-1] + s*config[0] + q;
+          sensitivity[idx] = grad_X(p,q);
+      }
+        // sensitivity[k1++] = grad_X(p, q);
   }
 
    for(int i=0;i<m-1;i++){
@@ -79,15 +82,6 @@ void backward_tanh(
     const double *out, const double *sensitivity,
     const double *x, int n, 
     const int64* config, int m, const double *theta, int n_theta){
-  int k1 = 0;
-  for(int i=0;i<n*config[0];i++) grad_x[i] = 0.0;
-  for(int s=0;s<config[m-1];s++)
-    for(int i=0;i<n;i++)
-      for(int j=0;j<config[0];j++){
-        int idx = j+i*config[0];
-        // printf("%f,%f\n",sensitivity[k1],grad_out[s+i*config[m-1]]);
-        grad_x[idx] += sensitivity[k1++]*grad_out[s+i*config[m-1]];
-      }
 
   /*==========================================================*/
   Stack stack;
@@ -149,7 +143,12 @@ void backward_tanh(
       grad_theta[k++] = grad_b(p);
   }
 
-
+  auto grad_X = X.get_gradient();
+  k = 0;
+  for(int i=0;i<n;i++)
+    for(int j=0;j<config[0];j++){
+      grad_x[k++] = grad_X(i, j);
+    }
 
   for(int i=0;i<m-1;i++){
     delete W[i];

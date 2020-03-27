@@ -55,14 +55,14 @@ sess = Session(); init(sess)
 #       in the case of `multiple=true`, you also need to specify which component you are testings
 # gradient check -- v
 function scalar_function(m)
-    return sum(extended_nn(x,config,m,activation)[1]^2)
+    return sum(extended_nn(m,config,θ,activation)[1]^2)
 end
 
 # TODO: change `m_` and `v_` to appropriate values
 m_ = constant(rand(length(θ)))
 v_ = rand(length(θ))
-# m_ = constant(rand(length(x)))
-# v_ = rand(length(x))
+m_ = constant(rand(length(x)))
+v_ = rand(length(x))
 y_ = scalar_function(m_)
 dy_ = gradients(y_, m_)
 ms_ = Array{Any}(undef, 5)
