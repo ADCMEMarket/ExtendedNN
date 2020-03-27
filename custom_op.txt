@@ -1,0 +1,7 @@
+ExtendedNn
+double x(?)
+int64 config(?)
+double theta(?)
+string activation()
+double out(?) -> output
+double sensitivity(?) -> output
