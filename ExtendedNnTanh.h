@@ -50,6 +50,7 @@ void forward_tanh(
   int k1 = 0;
   //  compute sensitivity
   for (int s=0;s<config[m-1];s++){
+    clear_gradients();
     for(int i=0;i<config[m-1];i++){
       if(i==s) temp(i).set_gradient(1.0);
       else temp(i).set_gradient(0.0);
