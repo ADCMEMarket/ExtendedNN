@@ -30,8 +30,12 @@ endif()
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 
-include_directories(${TF_INC} ${HEADERS} ${EIGEN_INC} Adept-2/include)
-link_directories(${TF_LIB} Adept-2/adept/.libs)
+include_directories(${TF_INC} ${HEADERS} ${EIGEN_INC})
+link_directories(${TF_LIB})
+
+include_directories(${LIBDIR}/Adept-2/include)
+link_directories(${LIBDIR}/Adept-2/adept/.libs)
+
 
 #find_package(CUDA QUIET)
 #set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
