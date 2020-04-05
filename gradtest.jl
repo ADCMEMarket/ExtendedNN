@@ -17,15 +17,15 @@ end
 # TODO: specify your input parameters
 x = rand(20)
 config = [2,20,50,8]
-activation = "relu"
+activation = "tanh"
 
 W1 = rand(2,20); b1 = rand(20)
 W2  = rand(20,50); b2 = rand(50);
 W3 = rand(50,8); b3 = rand(8)
 X = reshape(x, 2, 10)'|>Array 
 
-y1 = relu.(X*W1 .+ b1')
-y2 = relu.(y1*W2 .+ b2')
+y1 = tanh.(X*W1 .+ b1')
+y2 = tanh.(y1*W2 .+ b2')
 y3 = y2*W3 .+ b3'
 
 # x = rand(10)

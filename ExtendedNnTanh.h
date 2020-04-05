@@ -2,6 +2,7 @@ void forward_tanh(
     double *out, double *sensitivity,
     const double *x, int n, 
     const int64* config, int m, const double *theta){
+    const std::lock_guard<std::mutex> lock(mu);
    Stack stack;
    Array<2, double, true> X(n, config[0]);
    std::vector<Array<2, double, true>*> W(m-1);
@@ -83,7 +84,7 @@ void backward_tanh(
     const double *out, const double *sensitivity,
     const double *x, int n, 
     const int64* config, int m, const double *theta, int n_theta){
-
+  const std::lock_guard<std::mutex> lock(mu);
   /*==========================================================*/
   Stack stack;
   Array<2, double, true> X(n, config[0]);

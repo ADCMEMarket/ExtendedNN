@@ -17,5 +17,7 @@ adouble relu(adouble x){
   return fmax(x, 0.0);
 };
 
+std::mutex mu;  
+
 #include "ExtendedNnTanh.h"
 #include "ExtendedNnReLU.h"
