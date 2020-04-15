@@ -1,1 +1,1 @@
-julia -e 'using ADCME; install_adept()'
+
