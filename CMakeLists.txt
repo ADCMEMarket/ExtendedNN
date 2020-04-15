@@ -1,8 +1,5 @@
 add_library(ExtendedNn SHARED ExtendedNn.cpp)
-include_directories(${LIBDIR}/Adept-2/include)
-link_directories(${LIBDIR}/Adept-2/adept/.libs)
-
 set_property(TARGET ExtendedNn PROPERTY POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(ExtendedNn ${TF_LIB_FILE} adept)
+target_link_libraries(ExtendedNn ${TF_LIB_FILE} adept openblas)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build)
 set_target_properties(ExtendedNn PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build)
